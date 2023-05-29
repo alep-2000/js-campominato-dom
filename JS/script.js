@@ -8,6 +8,26 @@ function createSquareElement(){
     return square;
 }
 
+function generateRandomNumber(min, max){
+    return Math.floor(Math.random()* (max - min + 1) + min);
+}
+
+function fillArrayBombs(arrayBombs, max){
+    let check=false;
+    let random_number;
+    while(check === false){
+        random_number = generateRandomNumber(1, max);
+
+        if(!arrayBombs.includes(random_number)){
+            check = true;
+        }
+    }
+    return random_number;
+}
+
+// ARRAY DELLE BOMBE
+const arrayBombs = [];
+
 // RECUPERO L'ELEMENTO CON ID='BUTTON'
 const button_element= document.getElementById('button');
 
@@ -16,7 +36,6 @@ const button_element= document.getElementById('button');
 button_element.addEventListener('click', function(){
      // RECUPERO L'ELEMENTO CON ID='DIFFICULTY'
      const difficult_level= parseInt(document.getElementById('select-difficulty').value);
-     console.log(difficult_level);
  
      // DEFINISCO VALORE LIVELLI
      let cellsNumber;
@@ -34,9 +53,24 @@ button_element.addEventListener('click', function(){
    
     // RECUPERO L'ELEMENTO CON ID='GRID'
     const grid_element= document.getElementById('grid');
+    const points= document.getElementById('points');
     
     // RIGENERO LA GRIGLIA
     grid_element.innerHTML= '';
+    points.innerHTML='';
+    // INVOCAZIONE DELLE FUNZIONI
+    generateRandomNumber(1, cellsNumber);
+
+    for(let i=0; i<16; i++){
+        let number = fillArrayBombs(arrayBombs, cellsNumber);
+        arrayBombs.push(number);
+    }
+
+    // VARIABILE PER INTERROMPERE IL GIOCO
+    let gameOver = false;
+
+    // NUMERO CASELLE BLU CLICCATE
+    let clickForWin = 0;
     
     // CICLO FOR
     for(let i=0; i<cellsNumber; i++){
@@ -51,8 +85,18 @@ button_element.addEventListener('click', function(){
 
         // EVENT LISTENER
         square.addEventListener('click', function(){
-            this.classList.add('clicked');
-            console.log(this.innerText);
+            if(gameOver === false){
+                if(!arrayBombs.includes(parseInt(this.innerText))){
+                    this.classList.add('clicked');
+                    clickForWin++;
+                    console.log(clickForWin);
+                }
+                else{
+                    this.classList.add('bomb');
+                    gameOver = true;
+                    document.getElementById('points').innerText = `PUNTEGGIO: ${clickForWin}`;
+                }
+            }
         }) 
         // APPENDO LA GRIGLIA
         grid_element.append(square);

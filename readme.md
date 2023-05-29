@@ -13,10 +13,12 @@ Attenzione: nella stessa cella può essere posizionata al massimo una bomba, per
 
 SOLUZIONE:
 1 - Creare una funzione in cui generare numeri random (16) nel range di numeri della difficoltà scelta;
-2 - Creare un array in cui inserire i numeri random;
-3 - Creare un controllo per i numeri;
-    3.1 - ? SE il numero random è già uscito inserire nell'array e estrarne un altro;
-    3.2 - ALTRIMENTI inserire il numero nell'array e andare avanti;
+2 - Creare un array in cui inserire i numeri random vuoto;
+3 - Creare una funzione per riempire l'array
+    3.1 - Creare un ciclo while per generare il numero random almeno 16 volte 
+    3.2 - Creare un controllo per i numeri;
+        3.2.1 - ? SE il numero random è già uscito inserire nell'array e estrarne un altro;
+        3.2.2 - ALTRIMENTI inserire il numero nell'array e andare avanti;
 
 SOTTOPROBLEMA:
 In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
@@ -35,4 +37,5 @@ SOLUZIONE:
     1.1 - ? SE il giocatore clicca su una bomba o colora le caselle di blu evitando le bombe, la partita termina;
     1.2 - ALTRIMENTI va avanti
 2 - Tenere il conteggio delle caselle di colore blu cliccate;
-3 - Mostrare a video il punteggio;
+3 - Creare un div per il punteggio;
+4 - Mostrare a video il punteggio;
